@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Формулы по физике</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+        }
+        
+        h2 {
+            font-size: 2rem;
+        }
+        
+        .list-group-item {
+            font-size: 1.2rem;
+        }
+
+        /* Стили для якорей */
+        .section-link {
+            color: rgb(19, 42, 105); /* Синий цвет */
+            text-decoration: none; /* Убираем подчеркивание */
+            display: block; /* Делаем якоря блочными элементами */
+            margin: 5px 0; /* Отступы между якорями */
+            font-size: 1.5rem; /* Увеличиваем размер шрифта */ 
+        }
+
+        footer {
+            background-color: #f8f9fa;
+            padding: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <header class="text-white text-center py-4">
+        <img src="static/images/image 2.png" alt="Изображение" class="img-fluid mb-4" style="width: 800px; height: auto;"> 
+        <nav class="nav flex-column justify-content-center">
+            {% for category in ['Кинематика', 'Динамика', 'Статика', 'Гидростатика', 'Импульс', 'Работа, мощность, энергия', 'Термодинамика', 'Электростатика', 'Электрический ток', 'Магнетизм', 'Оптика', 'Атомная и ядерная физика', 'Основы специальной теории относительности'] %}
+                <a class="section-link" href="#{{ category|lower }}">{{ category }}</a>
+            {% endfor %}
+        </nav>
+    </header>
+
+    <main class="container my-4">
+        {% for category in ['Кинематика', 'Динамика', 'Статика', 'Гидростатика', 'Импульс', 'Работа, мощность, энергия', 'Термодинамика', 'Электростатика', 'Электрический ток', 'Магнетизм', 'Оптика', 'Атомная и ядерная физика', 'Основы специальной теории относительности'] %}
+            <section id="{{ category|lower }}">
+                <h2 class="my-4">{{ category }}</h2>
+                <ul class="list-group">
+                    {% for formula in formulas %}
+                        {% if formula[0] == category %}
+                            <li class="list-group-item">
+                                <strong>{{ formula[1] }}:</strong>
+                                {% for img in formula[2] %}
+                                    <img src="{{ img }}" alt="{{ formula[1] }}" class="img-fluid" style="max-width: 200px;">
+                                {% endfor %}
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </section>
+        {% endfor %}
+    </main>
+    
+    <footer class="text-center py-4">
+        <p>&copy; 2025 Формулы по физике</p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
